@@ -1,0 +1,13 @@
+hidden = ["favicon.ico","favicon.png", "messages.dat","transfer.php","result"]
+
+#run = "PHP_CLI_SERVER_WORKERS=3 php -S 0.0.0.0:8000 -t ."
+run = "php index.php"
+
+entrypoint = "index.php"
+
+[nix]
+channel = "stable-22_11"
+
+[auth]
+pageEnabled = false
+buttonEnabled = true
