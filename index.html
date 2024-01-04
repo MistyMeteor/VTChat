@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" style="touch-action: none;">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-transform,no-siteapp,no-cache,no-store,must-revalidate,max-age=0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta name="description" content="A simple public chatting website written in Swoole, by VertexStudio"/>
+    <meta name="keywords" content="chat,chatroom,php,js,replit"/>
+    <meta name="author" content="VertexStudio"/>
+    <meta name="robots" content="index,follow"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta name="google" content="notranslate"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,viewport-fit=cover"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="format detection" content="telephone=no,email=no,adress=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <title>VT Chat</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="css/ripple.css" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="images/favicon.svg"/>
+    <link rel="apple-touch-icon-precomposed" href="images/favicon.svg"/>
+    <link rel= "apple-touch-startup-image" href= "images/favicon.svg"/>
+    <script>
+      if (window.location.pathname !== "/") {
+        window.location.href = "https://vt-chat.vertexstudioofficial.repl.co/html/404.html";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="bg" id="main">
+      <div class="chatBase">
+        <div class="topbar">
+          
+          <span class="topbar-left">
+            <svg onclick="helpTrigger();" width="24" height="24" viewBox="0 0 24 24" class="svgIcon">
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M22 12.001C22 17.5238 17.5228 22.001 12 22.001C6.47715 22.001 2 17.5238 2 12.001C2 6.47813 6.47715 2.00098 12 2.00098C17.5228 2.00098 22 6.47813 22 12.001ZM20 12.001C20 16.4193 16.4183 20.001 12 20.001C7.58172 20.001 4 16.4193 4 12.001C4 7.5827 7.58172 4.00098 12 4.00098C16.4183 4.00098 20 7.5827 20 12.001ZM10.75 16.2438C10.75 15.5212 11.2991 15.001 11.9928 15.001C12.7009 15.001 13.25 15.5212 13.25 16.2438C13.25 16.9663 12.7009 17.501 11.9928 17.501C11.2991 17.501 10.75 16.9663 10.75 16.2438ZM12.2248 6.50098C10.0678 6.50098 8.44995 7.7443 8.44995 9.75158V9.77588C8.44995 10.052 8.67381 10.2759 8.94995 10.2759H9.75319C9.99311 10.2759 10.1876 10.0814 10.1876 9.84146C10.1876 8.71798 11.0564 8.11879 12.2248 8.11879C13.3633 8.11879 14.1123 8.71798 14.1123 9.57183C14.1123 10.3807 13.6929 10.7552 12.6443 11.2346L12.3447 11.3694C11.4609 11.7589 11.1313 12.3431 11.1313 13.3617V13.501C11.1313 13.7771 11.3552 14.001 11.6313 14.001H12.369C12.6451 14.001 12.869 13.7771 12.869 13.501V13.4666C12.869 13.0172 12.9888 12.8374 13.3483 12.6726L13.6479 12.5378C14.9062 11.9686 15.85 11.2196 15.85 9.58681V9.49693C15.85 7.77426 14.352 6.50098 12.2248 6.50098Z"/>
+            </svg>
+          </span>
+          <span class="topbar-center">
+            <svg class="topbar-center-icon" viewBox="0 0 280 280">
+            <path fill-rule="evenodd" fill="#147cc4" d="M118.26 1.517C41.668 13.491-10.794 82.676 3.395 153c5.338 26.458 21.818 53.997 42.855 71.615l5.75 4.816v24.785c0 13.631.202 24.784.449 24.784.246 0 10.458-5.702 22.692-12.67l22.244-12.67 6.558 1.205c18.867 3.467 24.568 4.126 35.557 4.113 92.87-.112 160.318-83.911 133.527-165.896C252.66 30.757 185.477-8.99 118.26 1.517M37.455 86.455c-1.612 1.611-2.456 3.586-2.457 5.75-.003 3.376 30.986 94.151 33.783 98.96 2.375 4.084 5.28 4.835 18.701 4.835 14.268 0 16.786-.683 19.114-5.185 1.683-3.256 30.015-83.4 32.813-92.82 3.232-10.884.057-13.92-14.603-13.963-14.9-.045-13.779-1.42-24.822 30.468-4.951 14.3-9.739 27.985-10.638 30.412l-1.635 4.412-3.977-11.412c-2.187-6.277-6.866-19.737-10.397-29.912-8.334-24.011-8.323-24-22.898-24-9.847 0-10.689.159-12.984 2.455m108.884-.072c-2.718 2.336-2.854 2.874-3.184 12.581-.632 18.548-.118 19.036 20.034 19.036H178V191.091l2.455 2.454c2.344 2.344 3.008 2.454 14.75 2.423 18.82-.048 17.795 2.43 17.795-43.033V118h13.545c18.348 0 18.464-.105 18.433-16.705-.019-10.075-.302-12.16-1.943-14.295l-1.92-2.5-45.968-.279-45.968-.279-2.84 2.441"/>
+            </svg>
+            <span class="topbar-text" id="topbarText">
+              Loading...
+            </span>
+          </span>
+          <span class="topbar-right">
+            <svg onclick="optTrigger();" width="24" height="24" viewBox="0 0 24 24" class="svgIcon">
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M12.01 2.25c.74 0 1.47.1 2.18.25.32.07.55.33.59.65l.17 1.53a1.38 1.38 0 001.92 1.11l1.4-.61c.3-.13.64-.06.85.17a9.8 9.8 0 012.2 3.8c.1.3 0 .63-.26.82l-1.24.92a1.38 1.38 0 000 2.22l1.24.92c.26.19.36.52.27.82a9.8 9.8 0 01-2.2 3.8.75.75 0 01-.85.17l-1.4-.62a1.38 1.38 0 00-1.93 1.12l-.17 1.52a.75.75 0 01-.58.65 9.52 9.52 0 01-4.4 0 .75.75 0 01-.57-.65l-.17-1.52a1.38 1.38 0 00-1.93-1.11l-1.4.62a.75.75 0 01-.85-.18 9.8 9.8 0 01-2.2-3.8c-.1-.3 0-.63.27-.82l1.24-.92a1.38 1.38 0 000-2.22l-1.24-.92a.75.75 0 01-.28-.82 9.8 9.8 0 012.2-3.8c.23-.23.57-.3.86-.17l1.4.62c.4.17.86.15 1.25-.08.38-.22.63-.6.68-1.04l.17-1.53a.75.75 0 01.58-.65c.72-.16 1.45-.24 2.2-.25zm0 1.5c-.45 0-.9.04-1.35.12l-.11.97a2.89 2.89 0 01-4.02 2.33l-.9-.4A8.3 8.3 0 004.28 9.1l.8.59a2.88 2.88 0 010 4.64l-.8.59a8.3 8.3 0 001.35 2.32l.9-.4a2.88 2.88 0 014.02 2.32l.1.99c.9.15 1.8.15 2.7 0l.1-.99a2.88 2.88 0 014.02-2.32l.9.4a8.3 8.3 0 001.36-2.32l-.8-.59a2.88 2.88 0 010-4.64l.8-.59a8.3 8.3 0 00-1.35-2.32l-.9.4a2.88 2.88 0 01-4.02-2.32l-.11-.98c-.45-.08-.9-.11-1.34-.12zM12 8.25a3.75 3.75 0 110 7.5 3.75 3.75 0 010-7.5zm0 1.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"/>
+            </svg>
+          </span>
+
+          </div>
+        <div class="cover" id="cover"></div>
+        <div class="help popUp" id="help">
+          <svg id="close" title="Close" alt="Close" class="btnClose" onclick="helpUntrigger();" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M17.707 16.293a1 1 0 0 1-1.414 1.414L12 13.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L10.586 12 6.293 7.707a1 1 0 0 1 1.414-1.414L12 10.586l4.293-4.293a1 1 0 1 1 1.414 1.414L13.414 12l4.293 4.293z" fill="white"/>
+          </svg>
+          <div class="options">
+            <div class="modal-content">
+              <div class="area">
+                <div class="title">Help</div>
+                
+                <div class="contents">
+                  <div class="subTitle">Styling</div>
+                  <div class="setGroup">
+                    <div>
+                      In VT Chat, you can style your messages using Markdown formats.<br>
+                      Existing ones include: 
+                    </div>
+                    <ul style="margin-bottom: 0px;">
+                      <li>Bold: **text**</li>
+                      <li>Italic: *text*</li>
+                      <li>Strikethrough: ~~text~~</li>
+                      <li>Hyperlinks: [text](hyperlink)</li>
+                      <li>Code (automatic JS highlight): ```text```</li>
+                      <li>Images: ![title](URL to image)</li>
+                      <li>Colored text: ?[text](color)</li>
+                      <li>Mentions (hyperlink to user's home page): @User</li>
+                    </ul>
+                </div>
+                </div>
+                <div class="contents">
+                  <div class="subTitle">Others</div>
+                  <div class="setGroup">
+                    <div>
+                  <div>These tips will help you use VT Chat</div>
+                  <ul style="margin-bottom: 0px;">
+                  <li>Reply to others by doubleclick on their messages.</li>
+                    <li>You can only send 6 messages per minute. A popup will appear if you exceed the limit. </li>
+                    <li>You can addline breaks by pressing Shift and then Enter. However, your message can only contain 5 line breaks. </li>
+                  </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="opt popUp" id="opt">
+          <svg id="close" title="Close" alt="Close" class="btnClose" onclick="optUntrigger();" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M17.707 16.293a1 1 0 0 1-1.414 1.414L12 13.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L10.586 12 6.293 7.707a1 1 0 0 1 1.414-1.414L12 10.586l4.293-4.293a1 1 0 1 1 1.414 1.414L13.414 12l4.293 4.293z" fill="white"/>
+          </svg>
+          <div class="options">
+            <div class="modal-content">
+                <div class="area">
+                  <div class="title">Options</div>
+
+                  <div class="contents">
+                    <div class="subTitle">Background</div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Default (Enderman Image Library)</span>
+                      <div class="switch-box">
+                          <input type="checkbox" id="default" hidden="hidden">
+                          <label for="default" class="switch">
+                              <div class="dot"></div>
+                          </label>
+                      </div>
+                    </div>
+
+                    <div class="setGroup">
+                      <div class="setOptCaption">Static</div>
+                      <btn onclick="switchBG(0); localStorage.currentBG = 0;">
+                        <div class="bgPreviewBox">
+                          <img src="https://images.weserv.nl/?url=https://storage.googleapis.com/replit/images/1702776842603_eb20f93ece05db418d14bc2901eb575b.jpeg">
+                        </div>
+                      </btn>
+                      
+                      <btn onclick="switchBG(1); localStorage.currentBG = 1;">
+                        <div class="bgPreviewBox">
+                          <img src="https://images.weserv.nl/?url=https://storage.googleapis.com/replit/images/1702777038179_699514778c1573e5f2a11d3b3dfff90f.jpeg">
+                        </div>
+                         </btn>
+                      
+                          <btn onclick="switchBG(2); localStorage.currentBG = 2;">
+                        <div class="bgPreviewBox">
+                          <img src="https://images.weserv.nl/?url=https://storage.googleapis.com/replit/images/1702777074628_e0c8d63dc2236423c028ea8af17959bf.jpeg">
+                        </div>
+                      </btn>
+
+                      <btn onclick="switchBG(3); localStorage.currentBG = 3;">
+                        <div class="bgPreviewBox">
+                          <img src="https://images.weserv.nl/?url=https://storage.googleapis.com/replit/images/1702713612440_b8c224f848359ebb472db722907e6456.jpeg">
+                        </div>
+                      </btn>
+                      
+                      <btn onclick="switchBG(4); localStorage.currentBG = 4;">
+                        <div class="bgPreviewBox">
+                          <img src="https://images.weserv.nl/?url=https://storage.googleapis.com/replit/images/1702776741098_39e0115476938f5d6a7c6d0a111cac2a.jpeg">
+                        </div>
+                      </btn>
+                      
+                      <btn onclick="switchBG(5); localStorage.currentBG = 5;">
+                      <div class="bgPreviewBox">
+                        <img src="https://s3.bmp.ovh/imgs/2022/03/7005a446647d1673.jpg">
+                      </div>
+                      </btn>
+                      
+                      <btn onclick="switchBG(6); localStorage.currentBG = 6;">
+                        <div class="bgPreviewBox">
+                          <img src="https://s3.bmp.ovh/imgs/2022/06/02/b41fe5403ade5029.jpg">
+                        </div>
+                      </btn>
+                      
+                      <btn onclick="switchBG(7); localStorage.currentBG = 7;">
+                        <div class="bgPreviewBox">
+                          <img src="https://images.weserv.nl/?url=https://storage.googleapis.com/replit/images/1702777757246_8990b6af28466de475ca2312fdeeab20.jpeg">
+                        </div>
+                      </btn>
+
+                      <btn onclick="switchBG(8); localStorage.currentBG = 8;">
+                        <div class="bgPreviewBox">
+                          <img src="https://images.weserv.nl/?url=https://storage.googleapis.com/replit/images/1702777696880_9e8b90b3c719a33feefd9533a5a498a9.jpeg">
+                        </div>
+                      </btn>
+                    </div>
+                    
+                    <div class="setGroup">
+                      <div class="setOptCaption">Live</div>
+                       <btn onclick="switchBG(9); localStorage.currentBG = 9;">
+                        <div class="bgPreviewBox">
+                          <img src="https://tuchuangs.com/imgs/2022/06/02/0c2ce56ef60e32dc.webp">
+                        </div>
+                       </btn>
+
+                       <btn onclick="switchBG(10); localStorage.currentBG = 10;">
+                        <div class="bgPreviewBox">
+                          <img src="https://s3.bmp.ovh/imgs/2023/12/19/a028c4309b837e32.webp">
+                        </div>
+                       </btn>
+
+                      <btn onclick="switchBG(11); localStorage.currentBG = 11;">
+                        <div class="bgPreviewBox">
+                          <img src="https://i2.100024.xyz/2023/12/26/piblqe.webp">
+                        </div>
+                       </btn>
+                    </div>
+                    <div class="setGroup">
+                      <div class="setOptCaption">Bing Daily Image</div>
+                      <btn onclick="switchBG(12); localStorage.currentBG = 12;">
+                        <div class="bgPreviewBox">
+                          <img src="https://33b412c3-cad9-4e47-a69b-3af434b71db6-00-1y81n090x8spa.pike.replit.dev/">
+                        </div>
+                      </btn>
+                    </div>
+                    <div class="setGroup">
+                      <div class="setOptCaption">Random ACG</div>
+                      <btn alt="API 1" title="API 1" onclick="switchBG(13); localStorage.currentBG = 12;">
+                        <div class="bgPreviewBox">
+                          <img src="https://img.xjh.me/random_img.php?return=302&type=bg">
+                          
+                        </div>
+                      </btn>
+                      <btn onclick="switchBG(14); localStorage.currentBG = 12;">
+                        <div class="bgPreviewBox">
+                          <img alt="API 2" title="API 2" src="https://www.dmoe.cc/random.php">
+
+                        </div>
+                      </btn>
+                      <btn onclick="switchBG(15); localStorage.currentBG = 12;">
+                        <div class="bgPreviewBox">
+                          <img alt="API 3" title="API 3" src="https://api.vvhan.com/api/acgimg">
+
+                        </div>
+                      </btn>
+                      <btn onclick="switchBG(16); localStorage.currentBG = 12;">
+                        <div class="bgPreviewBox">
+                          <img alt="API 4" title="API 4" src="https://api.yimian.xyz/img?size=1920x1080">
+
+                        </div>
+                      </btn>
+                    </div>
+                    <div class="setGroup">
+                      <div class="setOptCaption">Random Nature</div>
+                      
+                      <btn onclick="switchBG(17); localStorage.currentBG = 12;">
+                        <div class="bgPreviewBox">
+                          <img alt="API 1" title="API 1" src="https://picsum.photos/1920/1080">
+
+                        </div>
+                      </btn>
+                      <btn onclick="switchBG(18); localStorage.currentBG = 12;">
+                        <div class="bgPreviewBox">
+                          <img alt="API 2" title="API 2" src="https://source.unsplash.com/random">
+
+                        </div>
+                      </btn>
+                      
+                    </div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Pure Color</span>
+                      <label>
+                        <div class="color-box">
+                          <input class="input-color" id="colorPicker" type="color">
+                        </div>
+                        
+                      </label>
+
+                    </div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Use Current Background</span>
+                      <div class="switch-box">
+                          <input type="checkbox" id="useCurrent" hidden="hidden">
+                          <label for="useCurrent" class="switch">
+                              <div class="dot"></div>
+                          </label>
+                      </div>
+                    </div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Background Dark Corner Filter</span>
+                      <div class="switch-box">
+                          <input type="checkbox" id="bgShadow" hidden="hidden">
+                          <label for="bgShadow" class="switch">
+                              <div class="dot"></div>
+                          </label>
+                      </div>
+                    </div>
+                    </div>
+                  <div class="contents">
+                    <div class="subTitle">Color</div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Theme Color</span>
+                      <label>
+                        <div class="color-box">
+                          <input class="input-color" id="colorPicker" type="color">
+                        </div>
+
+                      </label>
+                    </div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Light Mode</span>
+                      <div class="switch-box">
+                          <input type="checkbox" id="light" hidden="hidden">
+                          <label for="light" class="switch">
+                              <div class="dot"></div>
+                          </label>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div class="contents">
+                    <div class="subTitle">Effects</div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Reduce Dynamic Effects</span>
+                      <div class="switch-box">
+                          <input type="checkbox" id="rde" hidden="hidden">
+                          <label for="rde" class="switch">
+                              <div class="dot"></div>
+                          </label>
+                      </div>
+                    </div>
+                    <div class="setGroup optGroup">
+                      <span class="setOptCaption">Gaussian Blur Effect</span>
+                      <div class="switch-box">
+                          <input type="checkbox" id="blur" hidden="hidden">
+                          <label for="blur" class="switch">
+                              <div class="dot"></div>
+                          </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+
+
+        <div id="msgBox" style="display: none;">
+          <noscript>
+            <div style="border-bottom:1px solid rgba(255,255,255,0.6); padding:10px; font-size:20px;">
+              This page requires JavaScript to function. Please enable JavaScript for this page or switch to a more modern browser. 
+            </div>
+          </noscript>
+        </div>
+        <div class="loader" id="loader" style="display: block;">
+          <div class="loader-container">
+            <div class="loader-text">Now Loading
+              <div class="loading-ani"></div>
+            </div>
+            <div class="loading-bar">
+              <div class="data-loading-bar" id="loadingBar" style="width:0%">
+                <div class="masker"></div>
+              </div>
+            </div>
+            <div>
+              <span id="messages-count">0%&nbsp;[0/0]</span>
+            </div>
+          </div>
+        </div>
+        <div class="sendArea">
+          <textarea autofocus placeholder="Your message..." id="inputMessage"></textarea>
+          <div class="bottom">
+            <div id="typing-indicator">Enter = Send | Shift + Enter = New Line</div>
+          <button id="sub" class="waves-effect waves-light" onclick="send();">Send</button>
+
+          </div>
+        </div>
+      </div>
+      </div>
+    
+    <script src="js/bg.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/styling.js"></script>
+    <script src="js/userdata.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/ripple.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+      //initialize
+      window.Prism.manual = true;
+      const topbarCenter = document.getElementById("topbarText");
+      initializeData()
+      .then(() => {
+        topbarCenter.innerHTML = `Welcome,&nbsp;${window.userData.name}!`;
+      }).catch(() => {
+        topbarCenter.innerHTML = "VT Chat";
+      })
+    </script>
+    <script>
+      "use strict";
+
+      let lastMsg;
+      if (document.documentMode) {
+        alert("Your browser is out of date!\nUpdate your browser to view this website correctly.");
+        window.open('','_self').close();
+      } 
+      
+      
+      function autoScroll() {
+        msgBox.scrollTop = msgBox.scrollHeight;
+        msgBox.style.scrollBehavior = 'smooth';
+      }
+      function initScroll() {
+        lastMsg = false;
+        msgBox.style.scrollBehavior = null;
+      }
+      initScroll();
+
+      function processMessage(line) {
+        const obj = JSON.parse(line);
+        const timestamp = obj.time;
+
+        if (timestamp) {
+          const hour = new Date(+timestamp).getHours();
+          let min = new Date(+timestamp).getMinutes();
+          let month = new Date(+timestamp).getMonth();
+          const date = new Date(+timestamp).getDate();
+          min = min < 10 ? '0' + min : min;
+          const time = ++month + "/" + date + "&nbsp;" + hour + ":" + min;
+          
+          function generateProfile(name) {
+            let number = 0n;
+            for (let i = 0n; i < name.length; i++) {
+              number += ((i + 2n) ** BigInt(name.charCodeAt(Number(i)))) % 27n;
+            }
+            number = Number(number % 27n + 17n);
+            const src = `https://replit.com/public/images/evalbot/evalbot_${number}.png`;
+            return src;
+          }
+          
+          return `
+          <div class="prefix">
+            <div class="name">${obj.name}</div>
+            <div style="display:none" class="time">${time}</div>
+          </div>
+
+          <div class="msg">
+            <img class="profile" src="${
+              obj.profileImage ?
+              "https://images.weserv.nl/?url=" + obj.profileImage : 
+              generateProfile(obj.name)
+            }">
+            <div class="text">${style(obj.msg)}</div>
+          </div>
+          `
+        }
+      }
+      function reply(element) {
+        const name = element.querySelector(".name").innerHTML;
+        const z = document.getElementById('inputMessage');
+        z.focus();
+        if (z.value.slice(0, 12) != 'Replying to ') {
+          z.value = 'Replying to @' + name + ': ' + z.value;
+        } else {
+          z.value = 'Replying to @' + name + ': ' + z.value.slice(z.value.indexOf(':') + 2);
+        }
+      }
+      function addMsg(msg) {
+        msg = processMessage(msg);
+        const e = document.createElement('div');
+        e.innerHTML = msg;
+        e.id = "msg";
+        e.addEventListener("dblclick", () => {
+          reply(e);
+        });
+
+        msgBox.append(e);
+        if (lastMsg) autoScroll();
+      }
+      let count = 0; // Counts the number of messages sent
+      let msgNum;
+      let delayTime = 1500;
+      function createSocket() {
+        const s = new WebSocket(window.location.href.replace("https://", "wss://") + "ws-server");
+        s.onopen = (e) => {
+          console.info("Request Started");
+          delayTime = 1500;
+          msgBox.innerHTML = "";
+          sub.disabled = false;
+          initScroll();
+        }
+        s.onmessage = (e) => {
+          const thing = JSON.parse(e.data);
+          
+          if (thing.data == "") return;
+          switch (thing.channel) {
+            case "message":
+              addMsg(thing.data);
+              count++;
+              const percent = count / (msgNum / 100);
+              document.getElementById("loadingBar").style.width = `${percent}%`;
+              document.getElementById("messages-count").innerHTML = `${percent.toFixed(2)}%&nbsp;[${count}/${msgNum}]`;
+              break;
+            case "lastMsg":
+              console.info("Received Last Message");
+              lastMsg = true;
+              document.getElementById('loader').style.display = 'none';
+              msgBox.style.display = 'block';
+              autoScroll();
+              count = 0;
+              break;
+            case "message count":
+              msgNum = thing.data;
+              //console.log(msgNum);
+              break;
+            default:
+              console.log(thing.data);
+          }
+        }
+        s.onclose = e => {
+          // reconnect if error occurs
+          if (!e.wasClean) {
+            console.error("Close wasn't clean: " + e.code);
+            setTimeout(() => {
+              socket = createSocket();
+            }, delayTime);
+            delayTime *= 2;
+            //inputMessage.placeholder = "Reconnecting..."
+            sub.disabled = true;
+          }
+        }
+        s.onerror = e => {
+          // reconnect if error occurs
+          console.error(e);
+          delayTime *= 2;
+          setTimeout(() => socket = createSocket(), delayTime);
+          //inputMessage.placeholder = "Reconnecting..."
+          sub.disabled = true;
+        }
+        return s;
+      }
+      let socket = createSocket();
+      // setInterval(() => console.log(socket.readyState), 100);
+
+    </script>
+    <script>
+      "use strict";
+
+      inputMessage.addEventListener("keydown", function(event) {
+        if (event.key == "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sub.click();
+        }
+      });
+      function sendBtn(state) {
+        if (state) {
+          // shows green button
+          sub.style.backgroundColor = '#39ab39';
+          sub.childNodes[0].nodeValue = 'Sent!';
+          setTimeout(() => {
+            // reset style
+            sub.style.backgroundColor = '';
+            sub.childNodes[0].nodeValue = 'Send';
+            sub.onclick = function() {
+              send();
+            }
+          }, 1500)
+        } else {
+          // shows red button
+          sub.style.backgroundColor = 'red';
+          sub.childNodes[0].nodeValue = 'Error';
+          setTimeout(() => {
+            sub.style.backgroundColor = '';
+            sub.childNodes[0].nodeValue = 'Send';
+          }, 1500)
+        }
+      }
+      //count function from lightchat
+      function CheckLines(string, counted) {
+        let i = 0;
+        for (let char of string) {
+          if (char == counted) i++;
+        }
+        return i;
+      }
+      function send() {
+        if (localStorage.msgs >= 7) {
+          alert('Sending messages too frequently, please wait and try again later.');
+          return;
+        }
+        const inputValue = inputMessage.value;
+        if (inputValue.trim().length == 0) return;
+        if(inputValue.length > 400 || CheckLines(inputValue, "\n") >= 6){
+          alert('Your message is too long! ')
+          return;
+        }
+        inputMessage.focus();
+        inputMessage.value = '';
+
+        const time = Math.floor(new Date().getTime());
+        if (socket.readyState == 1) {
+          // socket open
+          socket.send(JSON.stringify({
+            time,
+            msg: inputValue,
+            name: window.userData.name,
+            profileImage: window.userData.profileImage,
+          }));
+          
+          sendBtn(true);
+          console.log("Message sent! ");
+        } else {
+          // socket closed
+          sendBtn(false);
+        }
+        localStorage.msgs++;
+      }
+
+      if (!localStorage.time) localStorage.time = +new Date();
+      if (!localStorage.msgs) localStorage.msgs = 0;
+      let localTime = localStorage.time;
+      setInterval(() => {
+        const now = +new Date();
+        if (now - localTime >= 60000) {
+          localStorage.time = localTime = now;
+          localStorage.msgs = 0;
+        }
+      }, 1000)
+      
+      new Waves().displayEffect();
+
+      //background
+
+      </script>
+  </body>
+</html>
